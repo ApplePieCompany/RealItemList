@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Eureka
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,15 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		self.window = UIWindow(frame: UIScreen.main.bounds)
 		
 		// タブバーで遷移する画面を用意
-		let _: UIViewController = ListViewController()
+		//		let _: UIViewController = ListViewController()
 		let tab2: UIViewController = RegistViewController()
-		let tab3: UIViewController = ConfViewController()
+		let tab3: FormViewController = ConfViewController()
 		
-		// tab2をルートにしたナビゲーションを用意する
-		let navigationController = UINavigationController(rootViewController: ListViewController())
+		// ナビゲーション
+		let listnavigationController = UINavigationController(rootViewController: ListViewController())
 		
 		// タブバーアイテムを用意
-		navigationController.tabBarItem = UITabBarItem(title: "List", image: UIImage(named:"list.png"), tag: 1)
+		listnavigationController.tabBarItem = UITabBarItem(title: "List", image: UIImage(named:"list.png"), tag: 1)
 		tab2.tabBarItem = UITabBarItem(title: "Regist", image: UIImage(named:"regist.png"), tag: 2)
 		tab3.tabBarItem = UITabBarItem(title: "Config", image: UIImage(named:"conf"), tag: 3)
 		
@@ -36,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let tabBarController = UITabBarController()
 		tabBarController.setViewControllers(
 			[
-				navigationController,
+				listnavigationController,
 				tab2,
 				tab3
 			], animated: true)
