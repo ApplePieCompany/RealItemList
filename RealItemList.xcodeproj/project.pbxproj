@@ -42,6 +42,7 @@
 		0A415F861EFBA40800C37257 /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A415F851EFBA40800C37257 /* list.png */; };
 		0A415F891EFBA53D00C37257 /* conf.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A415F871EFBA53D00C37257 /* conf.png */; };
 		0A415F8A1EFBA53D00C37257 /* regist.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A415F881EFBA53D00C37257 /* regist.png */; };
+		0AF846171EFCDABA000A0A19 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF846161EFCDABA000A0A19 /* ItemModel.swift */; };
 		58D7F5B49CDE3B95CA54B4D8 /* Pods_RealItemList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C9FBF7E48BD9C8BB3952E5 /* Pods_RealItemList.framework */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +105,7 @@
 		0A415F851EFBA40800C37257 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
 		0A415F871EFBA53D00C37257 /* conf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = conf.png; sourceTree = "<group>"; };
 		0A415F881EFBA53D00C37257 /* regist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = regist.png; sourceTree = "<group>"; };
+		0AF846161EFCDABA000A0A19 /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		508CCF17771B207E9E4988D7 /* Pods-RealItemList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealItemList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RealItemList/Pods-RealItemList.debug.xcconfig"; sourceTree = "<group>"; };
 		93C9FBF7E48BD9C8BB3952E5 /* Pods_RealItemList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealItemList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBD225E73A966F184F9A3C9 /* Pods-RealItemList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealItemList.release.xcconfig"; path = "Pods/Target Support Files/Pods-RealItemList/Pods-RealItemList.release.xcconfig"; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				0A03B7B11EFCB8E20024DBEC /* ListViewModel.swift */,
+				0AF846161EFCDABA000A0A19 /* ItemModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				0A03B7B21EFCB8E20024DBEC /* ListViewModel.swift in Sources */,
 				0A03B7B01EFCA56B0024DBEC /* ItemViewController.swift in Sources */,
 				0A415F4B1EFB791100C37257 /* AppDelegate.swift in Sources */,
+				0AF846171EFCDABA000A0A19 /* ItemModel.swift in Sources */,
 				0A415F7F1EFB7E4900C37257 /* ListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

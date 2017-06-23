@@ -8,30 +8,17 @@
 
 import UIKit
 
-class ListViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource  {
-
-	var myCollectionView : UICollectionView!
+class ListViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource{
+	
 	var scrollBeginingPoint: CGPoint!
-
-	let constNavigationTitle = "My正規商品リスト"
-	let constReuseIdentifier = "MyCell"
-
-	var arr:[String] = []
-	var name: AnyObject? {
-		get {
-			return UserDefaults.standard.object(forKey: "name") as AnyObject
-		}
-		set {
-			UserDefaults.standard.set(newValue!, forKey: "name")
-			UserDefaults.standard.synchronize()
-		}
-	}
+	let listViewModel:ListViewModel = ListViewModel()
 	
 	init() {
 		super.init(nibName: nil, bundle: nil)
 		
 		self.view.backgroundColor = UIColor.white
 		self.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.mostViewed, tag: 1)
+		self.navigationItem.title = listViewModel.constNavigationTitle
 	}
 
 	required init?(coder aDecoder: NSCoder) {
@@ -47,15 +34,16 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
 		
 		// Do any additional setup after loading the view.
 
-		//Make Demo Photos
-		let _ListViewModel:ListViewModel = ListViewModel()
-		arr = _ListViewModel.getList()
-		
 		//Navigation Bar
-		self.navigationItem.title = constNavigationTitle
 		
+		// Cell Items
+		listViewModel.itemModels = listViewModel.getItemModels()
+
 		// CollectionView
-		self.view.addSubview(makeCollectionView())
+		listViewModel.myCollectionView = listViewModel.getMyCollecionView(frame: self.view.frame)
+		listViewModel.myCollectionView.delegate = self
+		listViewModel.myCollectionView.dataSource = self
+		self.view.addSubview(listViewModel.myCollectionView)
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -74,59 +62,35 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
 	}
 	*/
 
-	// CollectionViewを作成
-	func makeCollectionView()->UICollectionView{
-		let layout = UICollectionViewFlowLayout()
-		layout.itemSize = CGSize(width:54, height:54)
-		layout.sectionInset = UIEdgeInsetsMake(8, 16, 8, 16)
-		layout.headerReferenceSize = CGSize(width:100,height:8)
-		
-		myCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-		myCollectionView.backgroundColor = UIColor.white
-		myCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: constReuseIdentifier)
-		myCollectionView.delegate = self
-		myCollectionView.dataSource = self
-		return myCollectionView
-	}
-	
-	/*
-	Cellが選択された際に呼び出される
-	*/
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		name = arr[indexPath.row] as AnyObject
-		
-		let item = ItemViewController()
-		item.modalTransitionStyle = .crossDissolve
-		self.navigationController?.pushViewController(item as UIViewController, animated: true)
-	}
-	
+
 	/*
 	Cellの総数を返す
 	*/
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return arr.count
+		return listViewModel.itemModels.count
 	}
 	
 	/*
 	Cellに値を設定する
 	*/
 	internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: constReuseIdentifier, for: indexPath)
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: listViewModel.constReuseIdentifier, for: indexPath)
 		cell.backgroundColor = UIColor.lightGray
-
-		let imageView = UIImageView()
-		let img = UIImage(named:arr[indexPath.row])! as UIImage
-		imageView.frame = CGRect(x: 2, y: 2, width: 50, height: 50)
-		imageView.image = img
-		
-		cell.contentView.addSubview(imageView)
-		
-		//		let cell : UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: constReuseIdentifier,for: indexPath as IndexPath)
-		//		cell.backgroundColor = UIColor.lightGray
+		cell.contentView.addSubview(listViewModel.itemModels[indexPath.row].imageView)
 		return cell
 	}
-
 	
+	/*
+	Cellが選択された際に呼び出される
+	*/
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		listViewModel.name = listViewModel.itemModels[indexPath.row].name as AnyObject
+		
+		let item = ItemViewController()
+		item.modalTransitionStyle = .crossDissolve
+		self.navigationController?.pushViewController(item as UIViewController, animated: true)
+	}
+
 	//Scroll Begin
 	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
 		scrollBeginingPoint = scrollView.contentOffset;
@@ -135,14 +99,13 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
 	//Scroll Did
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		_ = scrollView.contentOffset;
-/*
+		/*
 		if(scrollBeginingPoint.y < currentPoint.y){
-			//			println("下へスクロール")
+		//			println("下へスクロール")
 		}
 		else{
-			//			println("上へスクロール")
+		//			println("上へスクロール")
 		}
 		*/
 	}
-	
 }

@@ -44,6 +44,8 @@ class ConfViewController: FormViewController {
 		
 		// Do any additional setup after loading the view.
 
+		let msg = "Xtsy5hx/ShJWCvyVm1+NXC6Jm/vvK+3X224WBM8vk82flD8TcgoCdGlyQduW4V4HaOXXhWYDkqxjOfkjnIhrGA=="
+		
 		form
 			+++ Section("My Profile")
 			<<< TextRow(){
@@ -68,20 +70,23 @@ class ConfViewController: FormViewController {
 				$0.onChange{ [unowned self] row in
 					self.birthday = row.value ?? Date()
 				}
-		}
+			}
 
 			+++ Section("My HASH")
 			<<< SwitchRow("switchRowTag"){
 				$0.title = "Show HASH"
 			}
-			<<< LabelRow(){
-				
+			<<< TextRow(){
 				$0.hidden = Condition.function(["switchRowTag"], { form in
 					return !((form.rowBy(tag: "switchRowTag") as? SwitchRow)?.value ?? false)
 				})
-				$0.title = "Xtsy5hx/ShJWCvyVm1+NXC6Jm/vvK+3X224WBM8vk82flD8TcgoCdGlyQduW4V4HaOXXhWYDkqxjOfkjnIhrGA=="
-		}
-		
+				$0.title = msg
+				$0.disabled=true
+				$0.onCellSelection({ cell, row in
+					self.copy2ClipBoard(msg: msg)
+					self.showAlert(msg: msg)
+				})
+			}
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -99,5 +104,16 @@ class ConfViewController: FormViewController {
 	// Pass the selected object to the new view controller.
 	}
 	*/
+
+	func copy2ClipBoard(msg:String){
+		UIPasteboard.general.string = msg
+	}
 	
+	func showAlert(msg:String) {
+		let alertController = UIAlertController(title: "クリップボードにコピーしました", message: msg, preferredStyle: .alert)
+		let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+		alertController.addAction(defaultAction)
+		present(alertController, animated: true)
+		
+	}
 }
