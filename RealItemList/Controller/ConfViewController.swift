@@ -53,6 +53,14 @@ class ConfViewController: FormViewController {
 					self.nickname = row.value ?? ""
 				}
 			}
+			<<< SegmentedRow<String>("sex"){
+				$0.options = ["男性", "女性"]
+				$0.title = "性別"
+				$0.value = "女性"
+				}.onChange{ row in
+					let userDefault = UserDefaults.standard
+					userDefault.setValue(row.value, forKey: "Sex")
+			}
 			<<< DateRow(){
 				$0.title = "Birthday"
 				$0.dateFormatter = type(of: self).dateFormat
