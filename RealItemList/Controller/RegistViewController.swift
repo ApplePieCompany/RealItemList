@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class RegistViewController: UINavigationController {
+class RegistViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
 	
 	var session: AVCaptureSession? = nil
 
@@ -40,7 +40,9 @@ class RegistViewController: UINavigationController {
 		super.viewDidLoad()
 		
 		// Do any additional setup after loading the view.
-		
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
 		let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
 		session = AVCaptureSession.init()
 		guard session != nil else {
@@ -84,33 +86,29 @@ class RegistViewController: UINavigationController {
 	// Pass the selected object to the new view controller.
 	}
 	*/
-	
-}
 
-extension RegistViewController : AVCaptureMetadataOutputObjectsDelegate {
+	func goForward(){
+		let modal = OwnerChangeViewController(nibName: nil, bundle: nil)
+		modal.modalTransitionStyle = .crossDissolve
+		present(modal, animated: true, completion: nil)
+
+		/*
+		let _OwnerChangeViewController: UIViewController = OwnerChangeViewController()
+		_OwnerChangeViewController.modalTransitionStyle = UIModalTransitionStyle.partialCurl
+		self.present(_OwnerChangeViewController, animated: true, completion: nil)
+		*/
+	}
+
 	func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
 		
 		for data in metadataObjects {
 			if let code = data as? AVMetadataMachineReadableCodeObject {
-				//				print("type \(code.type)")
-				//				print("result \(code.stringValue)")
-				
 				custom_hash = code.stringValue as AnyObject
-				let _custom_hash = custom_hash as! String
-				print("======" + _custom_hash + "======")
-				
-				//				self.dismiss(animated: true, completion: nil)
-				
-				//				self.dismiss(animated: true, completion: nil)
-				
-				/*
-				let modal = OwnerChangeViewController(nibName: nil, bundle: nil)
-				modal.modalTransitionStyle = .crossDissolve
-				present(modal, animated: true, completion: nil)
-				*/
-				
-				self.navigationController?.pushViewController(OwnerChangeViewController(), animated: false)
+				DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+					self.goForward()
+				}
 			}
 		}
 	}
+	
 }
