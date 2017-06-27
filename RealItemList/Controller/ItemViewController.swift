@@ -11,8 +11,8 @@ import SwiftyJSON
 
 class ItemViewController: UIViewController {
 
-	var url : String = "https://76c87932401b41fd959e90733cd0954d-vp0.us.blockchain.ibm.com:5004/chaincode"
 	var chainCode : String = "8a15262b11be5966f5816ecd52f6a177f1dcf3392892ea950f691874af1a7d6657afc03e87edbfe76a8fd7a4082680b2bfc4e836a3127aa656ab72b7651788c5"
+	var chaincode_url : String = "https://76c87932401b41fd959e90733cd0954d-vp0.us.blockchain.ibm.com:5004/chaincode"
 	var method_func = ["method":"query","func":"read"]
 	var args = "A101"
 	
@@ -50,7 +50,7 @@ class ItemViewController: UIViewController {
 	
 	func getImageView(_name:String)->UIImageView{
 		let chainCodeAccessModel = ChainCodeAccessModel()
-		chainCodeAccessModel.url = self.url
+		chainCodeAccessModel.url = self.chaincode_url
 		chainCodeAccessModel.chainCode = self.chainCode
 		chainCodeAccessModel.method = self.method_func["method"]
 		chainCodeAccessModel.funcs = self.method_func["func"]
