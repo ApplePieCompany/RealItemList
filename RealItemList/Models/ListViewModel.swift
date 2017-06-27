@@ -44,27 +44,32 @@ class ListViewModel: NSObject{
 		var _return:[ItemModel] = []
 		
 		for _ in 0..<3 {
-			_return.append(ItemModel().getItemModel(str: "ニコニコ笑う猫.jpg"))
-			_return.append(ItemModel().getItemModel(str: "7plus_rosegold.png"))
-			_return.append(ItemModel().getItemModel(str: "31u-w0RRlQL.jpg"))
-			_return.append(ItemModel().getItemModel(str: "79b8f1be-s.jpg"))
-			_return.append(ItemModel().getItemModel(str: "210_1.jpg"))
-			_return.append(ItemModel().getItemModel(str: "0000000001772.jpg"))
-			_return.append(ItemModel().getItemModel(str: "CELINE.jpg"))
-			_return.append(ItemModel().getItemModel(str: "20150528_24580.jpg"))
-			_return.append(ItemModel().getItemModel(str: "8006944501100_00.jpg"))
-			_return.append(ItemModel().getItemModel(str: "20081022154237.JPG"))
-			_return.append(ItemModel().getItemModel(str: "20170410095414.jpg"))
-			_return.append(ItemModel().getItemModel(str: "cl-ce666s-001-m-01-dl.jpg"))
-			_return.append(ItemModel().getItemModel(str: "crsm0000000000.jpg"))
-			_return.append(ItemModel().getItemModel(str: "daison.jpg"))
-			_return.append(ItemModel().getItemModel(str: "DSC05355-575x380.png"))
-			_return.append(ItemModel().getItemModel(str: "1488956091010.jpg"))
-			_return.append(ItemModel().getItemModel(str: "kelly_b.jpg"))
-			_return.append(ItemModel().getItemModel(str: "org_3-291x300.jpg"))
-			_return.append(ItemModel().getItemModel(str: "service_ka60_parts.jpg"))
-			_return.append(ItemModel().getItemModel(str: "TFALICOS.jpg"))
-			_return.append(ItemModel().getItemModel(str: "ダウンロード.jpeg"))
+			_return.append(ItemModel().getItemModel(_str: "ニコニコ笑う猫.jpg",_hash: "rSKEj5RmDGGlkjXjxXYXUcZM76eNvJR9owlkjMIcE2l/Bjef/I5J39jQofuzcYcltGdipYyCKSpP6MoUdV8m9w=="))
+			_return.append(ItemModel().getItemModel(_str: "7plus_rosegold.png",_hash: "2r/glmpXbEeFrwNxkcHc3eusk1ZtpSKuml0yEKkRXu1Vgp/yWWvWPLPOK7gaChGBDG+cJW+j/xYCNtGUh5Accw=="))
+			_return.append(ItemModel().getItemModel(_str: "31u-w0RRlQL.jpg",_hash: "BDWdgjVG3BvfIMq2zib9U/pdj4+9bWu6NhPKrxddWzKEkiSjibrB3yg9Z+639GyQkY+cSpM6YtwpwP8cEejxug=="))
+			_return.append(ItemModel().getItemModel(_str: "79b8f1be-s.jpg",_hash: "nXO8d1aqGgOUTEnCOd6FGbcV6e5yEpk3naxPN1mFe41DnPECNmvtC7Co+u1hIfO5R6Jq2m+WGaVg2/XMSNnE9A=="))
+
+			_return.append(ItemModel().getItemModel(_str: "210_1.jpg",_hash: "rSKEj5RmDGGlkjXjxXYXUcZM76eNvJR9owlkjMIcE2l/Bjef/I5J39jQofuzcYcltGdipYyCKSpP6MoUdV8m9w=="))
+			_return.append(ItemModel().getItemModel(_str: "0000000001772.jpg",_hash: "2r/glmpXbEeFrwNxkcHc3eusk1ZtpSKuml0yEKkRXu1Vgp/yWWvWPLPOK7gaChGBDG+cJW+j/xYCNtGUh5Accw=="))
+			_return.append(ItemModel().getItemModel(_str: "CELINE.jpg",_hash: "BDWdgjVG3BvfIMq2zib9U/pdj4+9bWu6NhPKrxddWzKEkiSjibrB3yg9Z+639GyQkY+cSpM6YtwpwP8cEejxug=="))
+			_return.append(ItemModel().getItemModel(_str: "20150528_24580.jpg",_hash: "nXO8d1aqGgOUTEnCOd6FGbcV6e5yEpk3naxPN1mFe41DnPECNmvtC7Co+u1hIfO5R6Jq2m+WGaVg2/XMSNnE9A=="))
+			
+			_return.append(ItemModel().getItemModel(_str: "8006944501100_00.jpg",_hash: "rSKEj5RmDGGlkjXjxXYXUcZM76eNvJR9owlkjMIcE2l/Bjef/I5J39jQofuzcYcltGdipYyCKSpP6MoUdV8m9w=="))
+			_return.append(ItemModel().getItemModel(_str: "20081022154237.JPG",_hash: "2r/glmpXbEeFrwNxkcHc3eusk1ZtpSKuml0yEKkRXu1Vgp/yWWvWPLPOK7gaChGBDG+cJW+j/xYCNtGUh5Accw=="))
+			_return.append(ItemModel().getItemModel(_str: "20170410095414.jpg",_hash: "BDWdgjVG3BvfIMq2zib9U/pdj4+9bWu6NhPKrxddWzKEkiSjibrB3yg9Z+639GyQkY+cSpM6YtwpwP8cEejxug=="))
+			_return.append(ItemModel().getItemModel(_str: "cl-ce666s-001-m-01-dl.jpg",_hash: "nXO8d1aqGgOUTEnCOd6FGbcV6e5yEpk3naxPN1mFe41DnPECNmvtC7Co+u1hIfO5R6Jq2m+WGaVg2/XMSNnE9A=="))
+			
+			_return.append(ItemModel().getItemModel(_str: "crsm0000000000.jpg",_hash: "rSKEj5RmDGGlkjXjxXYXUcZM76eNvJR9owlkjMIcE2l/Bjef/I5J39jQofuzcYcltGdipYyCKSpP6MoUdV8m9w=="))
+			_return.append(ItemModel().getItemModel(_str: "daison.jpg",_hash: "2r/glmpXbEeFrwNxkcHc3eusk1ZtpSKuml0yEKkRXu1Vgp/yWWvWPLPOK7gaChGBDG+cJW+j/xYCNtGUh5Accw=="))
+			_return.append(ItemModel().getItemModel(_str: "DSC05355-575x380.png",_hash: "BDWdgjVG3BvfIMq2zib9U/pdj4+9bWu6NhPKrxddWzKEkiSjibrB3yg9Z+639GyQkY+cSpM6YtwpwP8cEejxug=="))
+			_return.append(ItemModel().getItemModel(_str: "1488956091010.jpg",_hash: "nXO8d1aqGgOUTEnCOd6FGbcV6e5yEpk3naxPN1mFe41DnPECNmvtC7Co+u1hIfO5R6Jq2m+WGaVg2/XMSNnE9A=="))
+			
+			_return.append(ItemModel().getItemModel(_str: "kelly_b.jpg",_hash: "rSKEj5RmDGGlkjXjxXYXUcZM76eNvJR9owlkjMIcE2l/Bjef/I5J39jQofuzcYcltGdipYyCKSpP6MoUdV8m9w=="))
+			_return.append(ItemModel().getItemModel(_str: "org_3-291x300.jpg",_hash: "2r/glmpXbEeFrwNxkcHc3eusk1ZtpSKuml0yEKkRXu1Vgp/yWWvWPLPOK7gaChGBDG+cJW+j/xYCNtGUh5Accw=="))
+			_return.append(ItemModel().getItemModel(_str: "service_ka60_parts.jpg",_hash: "BDWdgjVG3BvfIMq2zib9U/pdj4+9bWu6NhPKrxddWzKEkiSjibrB3yg9Z+639GyQkY+cSpM6YtwpwP8cEejxug=="))
+			_return.append(ItemModel().getItemModel(_str: "TFALICOS.jpg",_hash: "nXO8d1aqGgOUTEnCOd6FGbcV6e5yEpk3naxPN1mFe41DnPECNmvtC7Co+u1hIfO5R6Jq2m+WGaVg2/XMSNnE9A=="))
+			
+			_return.append(ItemModel().getItemModel(_str: "ダウンロード.jpeg",_hash: "rSKEj5RmDGGlkjXjxXYXUcZM76eNvJR9owlkjMIcE2l/Bjef/I5J39jQofuzcYcltGdipYyCKSpP6MoUdV8m9w=="))
 		}
 		
 		return _return

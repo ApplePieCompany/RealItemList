@@ -8,10 +8,12 @@
 
 import UIKit
 import AVFoundation
+import SwiftyJSON
 
 class RegistViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
 	
 	var session: AVCaptureSession? = nil
+	let nextView : UIViewController = OwnerChangeViewController(nibName: nil, bundle: nil)
 
 	var custom_hash: AnyObject? {
 		get {return UserDefaults.standard.object(forKey: "custom_hash") as AnyObject}
@@ -26,6 +28,8 @@ class RegistViewController: UIViewController,AVCaptureMetadataOutputObjectsDeleg
 		
 		//		self.view.backgroundColor = UIColor.green
 		self.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.favorites, tag: 2)
+		
+		nextView.modalTransitionStyle = .crossDissolve
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -87,27 +91,50 @@ class RegistViewController: UIViewController,AVCaptureMetadataOutputObjectsDeleg
 	}
 	*/
 
-	func goForward(){
-		let modal = OwnerChangeViewController(nibName: nil, bundle: nil)
-		modal.modalTransitionStyle = .crossDissolve
-		present(modal, animated: true, completion: nil)
+	func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+		for metadata in metadataObjects as! [AVMetadataMachineReadableCodeObject] {
+			if metadata.type == AVMetadataObjectTypeQRCode {
+				if metadata.stringValue != nil {
+					DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+						self.goForward(_custom_hash: metadata.stringValue as AnyObject)
+					}
+				}
+			}
+		}
+	}
 
+	//Change Owner画面遷移
+	func goForward(_custom_hash:AnyObject){
+		getBlockChain(_custom_hash: _custom_hash)
+
+		present(nextView, animated: true, completion: nil)
+		
 		/*
 		let _OwnerChangeViewController: UIViewController = OwnerChangeViewController()
 		_OwnerChangeViewController.modalTransitionStyle = UIModalTransitionStyle.partialCurl
 		self.present(_OwnerChangeViewController, animated: true, completion: nil)
 		*/
 	}
-
-	func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+	
+	func getBlockChain(_custom_hash:AnyObject){
+		let chainCode : String = "8a15262b11be5966f5816ecd52f6a177f1dcf3392892ea950f691874af1a7d6657afc03e87edbfe76a8fd7a4082680b2bfc4e836a3127aa656ab72b7651788c5"
+		let chaincode_url : String = "https://76c87932401b41fd959e90733cd0954d-vp0.us.blockchain.ibm.com:5004/chaincode"
+		var method_func = ["method":"query","func":"read"]
+		let args = "A101"
+		/* ほんとは引数の_custom_hashがKey */
 		
-		for data in metadataObjects {
-			if let code = data as? AVMetadataMachineReadableCodeObject {
-				custom_hash = code.stringValue as AnyObject
-				DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-					self.goForward()
-				}
-			}
+		let chainCodeAccessModel = ChainCodeAccessModel()
+		chainCodeAccessModel.url = chaincode_url
+		chainCodeAccessModel.chainCode = chainCode
+		chainCodeAccessModel.method = method_func["method"]
+		chainCodeAccessModel.funcs = method_func["func"]
+		chainCodeAccessModel.key = args
+		chainCodeAccessModel.makeParams()
+		
+		let alamoController = AlamoController()
+		alamoController.getAlamofire(model:chainCodeAccessModel) { responseObject, error in
+			self.custom_hash = JSON(responseObject!) as AnyObject
+			//			print(json["result"])
 		}
 	}
 	
