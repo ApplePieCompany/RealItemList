@@ -31,6 +31,10 @@ class ItemModel: NSObject {
 		self.imageView.image = UIImage(named:_name)! as UIImage
 	}
 	
+	init(_hashkey:String){
+		self.hashkey = _hashkey
+	}
+	
 	func setOwner(_para:JSON){
 		var _dictionary : [String:String] = [:]
 		for item in _para["result"]{

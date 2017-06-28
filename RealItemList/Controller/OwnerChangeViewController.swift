@@ -12,7 +12,6 @@ import Eureka
 class OwnerChangeViewController: FormViewController {
 
 	var constMyHash = "Xtsy5hx/ShJWCvyVm1+NXC6Jm/vvK+3X224WBM8vk82flD8TcgoCdGlyQduW4V4HaOXXhWYDkqxjOfkjnIhrGA=="
-	var customHash : AnyObject!
 	var serial = ""
 
 	var custom_hash: AnyObject? {
@@ -26,9 +25,6 @@ class OwnerChangeViewController: FormViewController {
 		
 		self.view.backgroundColor = UIColor.green
 		
-		self.customHash = custom_hash
-
-		
 		form
 			+++ Section("正規商品登録")
 			<<< TextRow(){
@@ -38,7 +34,7 @@ class OwnerChangeViewController: FormViewController {
 
 			<<< TextRow(){
 				$0.title = "ItemHash"
-				//				$0.value = self.customHash
+				$0.value = self.custom_hash as? String
 			}
 
 			<<< TextRow(){
