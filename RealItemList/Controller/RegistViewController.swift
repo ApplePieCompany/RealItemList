@@ -65,8 +65,11 @@ class RegistViewController: UIViewController,AVCaptureMetadataOutputObjectsDeleg
 			preview.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height);
 			self.view.layer.insertSublayer(preview, at: 0)
 		}
-		
-		// Start
+	}
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+
 		self.session?.startRunning()
 	}
 	
@@ -105,7 +108,7 @@ class RegistViewController: UIViewController,AVCaptureMetadataOutputObjectsDeleg
 	//Change Owner画面遷移
 	func goForward(_custom_hash:AnyObject){
 		getBlockChain(_custom_hash: _custom_hash)
-
+		
 		let item = OwnerChangeViewController()
 		item.modalTransitionStyle = .crossDissolve
 		self.navigationController?.pushViewController(item as UIViewController, animated: true)
