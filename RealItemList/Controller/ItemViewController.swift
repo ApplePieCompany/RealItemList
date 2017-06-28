@@ -19,6 +19,11 @@ class ItemViewController: UIViewController {
 	var name: AnyObject? {
 		get {return UserDefaults.standard.object(forKey: "name") as AnyObject}
 	}
+
+	var hashKey: AnyObject? {
+		get {return UserDefaults.standard.object(forKey: "hashKey") as AnyObject}
+	}
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -26,9 +31,27 @@ class ItemViewController: UIViewController {
 		// Do any additional setup after loading the view.
 
 		self.view.backgroundColor = UIColor.white
+
+		let chainCodeAccessModel = ChainCodeAccessModel()
+		chainCodeAccessModel.url = self.chaincode_url
+		chainCodeAccessModel.chainCode = self.chainCode
+		chainCodeAccessModel.method = self.method_func["method"]
+		chainCodeAccessModel.funcs = self.method_func["func"]
+		chainCodeAccessModel.key = self.args
+		chainCodeAccessModel.makeParams()
+		
+		//QUERY CHAIN CODE
+		let alamoController = AlamoController()
+		alamoController.getAlamofire(model:chainCodeAccessModel) { responseObject, error in
+			let json = JSON(responseObject!)
+			print(json["result"])
+		}
 		
 		// CollectionView
-		self.view.addSubview(getImageView(_name: name as! String))
+		let _itemModel : ItemModel = ItemModel(_name: name as! String,_hashkey: hashKey as! String)
+		_itemModel.imageView.frame = CGRect(x: 50, y: 50, width: self.view.bounds.width/2, height: self.view.bounds.height/2)
+		_itemModel.imageView.contentMode = UIViewContentMode.scaleAspectFill
+		self.view.addSubview(_itemModel.imageView)
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -47,27 +70,4 @@ class ItemViewController: UIViewController {
 	}
 	*/
 
-	
-	func getImageView(_name:String)->UIImageView{
-		let chainCodeAccessModel = ChainCodeAccessModel()
-		chainCodeAccessModel.url = self.chaincode_url
-		chainCodeAccessModel.chainCode = self.chainCode
-		chainCodeAccessModel.method = self.method_func["method"]
-		chainCodeAccessModel.funcs = self.method_func["func"]
-		chainCodeAccessModel.key = self.args
-		chainCodeAccessModel.makeParams()
-		
-		let alamoController = AlamoController()
-		alamoController.getAlamofire(model:chainCodeAccessModel) { responseObject, error in
-			let json = JSON(responseObject!)
-			print(json["result"])
-		}
-		
-		let imageView = UIImageView()
-		let img = UIImage(named:_name)! as UIImage
-		imageView.frame = CGRect(x: 50, y: 50, width: self.view.bounds.width/2, height: self.view.bounds.height/2)
-		imageView.contentMode = UIViewContentMode.scaleAspectFill
-		imageView.image = img
-		return imageView
-	}
 }

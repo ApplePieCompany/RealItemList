@@ -13,18 +13,18 @@ import SwiftyJSON
 class ItemModel: NSObject {
 
 	var name:String = ""
-	var imageView:UIImageView!
 	var hashkey:String = ""
+	var imageView:UIImageView!
 	
-	override init() {
+	convenience override init(){
+		self.init()
 	}
 
-	func getItemModel(_str:String, _hash:String)->ItemModel {
-		self.name = _str
-		self.hashkey = _hash
+	init(_name:String,_hashkey:String) {
+		self.name = _name
+		self.hashkey = _hashkey
 		self.imageView = UIImageView()
 		self.imageView.frame = CGRect(x: 2, y: 2, width: 50, height: 50)
-		self.imageView.image = UIImage(named:_str)! as UIImage
-		return self
-	}	
+		self.imageView.image = UIImage(named:_name)! as UIImage
+	}
 }

@@ -13,36 +13,13 @@ import Eureka
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	internal var window: UIWindow?
-	private var myTabBarController: UITabBarController!
+	private var myTabBarController: MainTabBarController = MainTabBarController()
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		
-		self.window = UIWindow(frame: UIScreen.main.bounds)
-		
-		// タブバーで遷移する画面を用意
-		//		let _: UIViewController = ListViewController()
-		let tab2: UIViewController = RegistViewController()
-		let tab3: FormViewController = ConfViewController()
-		
-		// ナビゲーション
-		let listnavigationController = UINavigationController(rootViewController: ListViewController())
-		
-		// タブバーアイテムを用意
-		listnavigationController.tabBarItem = UITabBarItem(title: "List", image: UIImage(named:"list.png"), tag: 1)
-		tab2.tabBarItem = UITabBarItem(title: "Regist", image: UIImage(named:"regist.png"), tag: 2)
-		tab3.tabBarItem = UITabBarItem(title: "Config", image: UIImage(named:"conf"), tag: 3)
-		
-		// タブバーにviewを渡す
-		let tabBarController = UITabBarController()
-		tabBarController.setViewControllers(
-			[
-				listnavigationController,
-				tab2,
-				tab3
-			], animated: true)
-		
-		self.window?.rootViewController = tabBarController
+		self.window = UIWindow(frame: UIScreen.main.bounds)		
+		self.window?.rootViewController = myTabBarController
 		self.window?.makeKeyAndVisible()
 		return true
 	}

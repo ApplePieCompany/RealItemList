@@ -34,12 +34,8 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
 		
 		// Do any additional setup after loading the view.
 
-		//Navigation Bar
-		
 		// Cell Items
 		listViewModel.itemModels = listViewModel.getItemModels()
-
-		// CollectionView
 		listViewModel.myCollectionView = listViewModel.getMyCollecionView(frame: self.view.frame)
 		listViewModel.myCollectionView.delegate = self
 		listViewModel.myCollectionView.dataSource = self
@@ -50,6 +46,10 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+	}
+
 	
 	
 	/*
@@ -85,6 +85,7 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
 	*/
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		listViewModel.name = listViewModel.itemModels[indexPath.row].name as AnyObject
+		listViewModel.hashKey = listViewModel.itemModels[indexPath.row].hashkey as AnyObject
 		
 		let item = ItemViewController()
 		item.modalTransitionStyle = .crossDissolve
