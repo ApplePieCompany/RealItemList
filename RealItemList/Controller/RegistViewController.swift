@@ -95,6 +95,7 @@ class RegistViewController: UIViewController,AVCaptureMetadataOutputObjectsDeleg
 		for metadata in metadataObjects as! [AVMetadataMachineReadableCodeObject] {
 			if metadata.type == AVMetadataObjectTypeQRCode {
 				if metadata.stringValue != nil {
+					self.session?.stopRunning()
 					DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
 						self.goForward(_custom_hash: metadata.stringValue as AnyObject)
 					}

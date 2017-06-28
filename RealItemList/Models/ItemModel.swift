@@ -17,7 +17,7 @@ class ItemModel: NSObject {
 	var imageView:UIImageView!
 
 	var serial:String!
-	var upd:Date!
+	var upd:String!
 	
 	convenience override init(){
 		self.init()
@@ -31,17 +31,23 @@ class ItemModel: NSObject {
 		self.imageView.image = UIImage(named:_name)! as UIImage
 	}
 	
-	func setOwner(_para:AnyObject){
-		var dic : [String:String] = [:]
-		let sp = _para.components(separatedBy: ",")
-		for ele in sp{
-			let csp = ele.components(separatedBy: ":")
-			dic[csp[0]]=csp[1]
+	func setOwner(_para:JSON){
+		var _dictionary : [String:String] = [:]
+		for item in _para["result"]{
+			_dictionary[item.0]=item.1.stringValue
 		}
 		
-		self.serial = dic["ser"]
-		let formatter = DateFormatter()
-		formatter.dateFormat = "yyyy/MM/dd"
-		self.upd = formatter.date(from: dic["upd"]!)!
+		if(_dictionary["status"] == "OK"){
+			let _message = _dictionary["message"]
+			let sp = _message?.components(separatedBy: ",")
+			var _cdictionary : [String:String] = [:]
+			for item in sp!{
+				let csp = item.components(separatedBy: ":")
+				_cdictionary[csp[0].replacingOccurrences(of: "\'",with: "")]=csp[1].replacingOccurrences(of: "\'",with: "")
+			}
+			
+			self.serial = _cdictionary["ser"]
+			self.upd = _cdictionary["upd"]
+		}
 	}
 }

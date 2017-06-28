@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import CoreImage
 
 class ItemViewController: UIViewController {
 
@@ -49,13 +50,23 @@ class ItemViewController: UIViewController {
 		let alamoController = AlamoController()
 		alamoController.getAlamofire(model:chainCodeAccessModel) { responseObject, error in
 			let json = JSON(responseObject!)
-			let param = json["result"]["message"]
-			
-			//			_itemModel.setOwner(_para: param as AnyObject)
 
-			let _ser : String = "Serial : \(json["result"]["message"]["ser"])"
-			self.view.addSubview(self.makeLabel(_x: 10,_y: self.view.bounds.height/2+10,_w: 100,_h: 20,_t: _ser))
+			_itemModel.setOwner(_para: json)
+
+			let _x : CGFloat = 10
+			var _y : CGFloat = self.view.bounds.height/2 + 50
+			let _w : CGFloat = self.view.bounds.width
+			let _h : CGFloat = 25
 			
+			let _ser : String = "商品シリアル番号: \(_itemModel.serial ?? "")"
+			self.view.addSubview(self.makeLabel(_x: _x,_y: _y,_w: _w,_h: _h,_t: _ser))
+
+			_y += 25
+			let _upd : String = "オーナー登録日　: \(_itemModel.upd ?? "")"
+			self.view.addSubview(self.makeLabel(_x: _x,_y: _y,_w: _w,_h: _h,_t: _upd))
+
+			_y += 25
+			self.view.addSubview(self.makeImageView(_x: _x, _y: _y, _w: 100, _h: 100, _hashkey: self.hashKey as! String))
 		}
 	}
 	
@@ -69,10 +80,24 @@ class ItemViewController: UIViewController {
 		let _return: UILabel = UILabel(frame: CGRect(x: _x, y: _y, width: _w, height: _h))
 		_return.textColor = UIColor.black
 		_return.text = _t
-		_return.textAlignment = NSTextAlignment.right
 		_return.adjustsFontSizeToFitWidth = true
 		return _return
 	}
+	
+	func makeImageView(_x:CGFloat,_y:CGFloat,_w:CGFloat,_h:CGFloat,_hashkey:String)->UIImageView{
+		let _return : UIImageView = UIImageView()
+
+		let data = _hashkey.data(using: String.Encoding.utf8)!
+		let qr = CIFilter(name: "CIQRCodeGenerator", withInputParameters: ["inputMessage": data, "inputCorrectionLevel": "M"])!
+		let sizeTransform = CGAffineTransform(scaleX: 10, y: 10)
+		let qrImage = qr.outputImage!.applying(sizeTransform)
+		
+		_return.frame = CGRect(x: _x, y: _y, width: _w, height: _h)
+		_return.image = UIImage(ciImage: qrImage)
+		
+		return _return
+	}
+	
 	
 	/*
 	// MARK: - Navigation
