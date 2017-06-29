@@ -12,17 +12,12 @@ import Eureka
 class ConfViewController: FormViewController {
 
 	let constNavigationTitle = "設定画面"
+	var MyHash : String!
 
 	var nickname = ""
 	var birthday = Date()
 
-	static var dateFormat: DateFormatter = {
-		let f = DateFormatter()
-		f.dateFormat = "yyyy/MM/dd"
-		
-		return f
-	}()
-	
+	static var dateFormat = Utility.dateFormat
 	
 	init() {
 		super.init(nibName: nil, bundle: nil)
@@ -44,7 +39,7 @@ class ConfViewController: FormViewController {
 		
 		// Do any additional setup after loading the view.
 
-		let msg = "Xtsy5hx/ShJWCvyVm1+NXC6Jm/vvK+3X224WBM8vk82flD8TcgoCdGlyQduW4V4HaOXXhWYDkqxjOfkjnIhrGA=="
+		self.MyHash = Utility.MyHash
 		
 		form
 			+++ Section("My Profile")
@@ -80,11 +75,11 @@ class ConfViewController: FormViewController {
 				$0.hidden = Condition.function(["switchRowTag"], { form in
 					return !((form.rowBy(tag: "switchRowTag") as? SwitchRow)?.value ?? false)
 				})
-				$0.title = msg
+				$0.title = self.MyHash
 				$0.disabled=true
 				$0.onCellSelection({ cell, row in
-					self.copy2ClipBoard(msg: msg)
-					self.showAlert(msg: msg)
+					self.copy2ClipBoard(msg: self.MyHash)
+					self.showAlert(msg: self.MyHash)
 				})
 			}
 	}

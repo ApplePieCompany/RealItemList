@@ -34,7 +34,7 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
 		
 		// Do any additional setup after loading the view.
 
-		// Cell Items
+		// ListViewModelの編集
 		listViewModel.itemModels = listViewModel.getItemModels()
 		listViewModel.myCollectionView = listViewModel.getMyCollecionView(frame: self.view.frame)
 		listViewModel.myCollectionView.delegate = self
@@ -47,8 +47,6 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
 		// Dispose of any resources that can be recreated.
 	}
 	
-	override func viewDidAppear(_ animated: Bool) {
-	}
 
 	
 	
@@ -63,6 +61,8 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
 	*/
 
 
+	/* 以下、Delegate */
+	
 	/*
 	Cellの総数を返す
 	*/
@@ -84,6 +84,8 @@ class ListViewController: UIViewController,UICollectionViewDelegate, UICollectio
 	Cellが選択された際に呼び出される
 	*/
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+		/* ItemViewControllerへ渡す変数の設定と画面遷移 */
 		listViewModel.name = listViewModel.itemModels[indexPath.row].name as AnyObject
 		listViewModel.hashKey = listViewModel.itemModels[indexPath.row].hashkey as AnyObject
 		

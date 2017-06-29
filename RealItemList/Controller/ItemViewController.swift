@@ -12,10 +12,6 @@ import CoreImage
 
 class ItemViewController: UIViewController {
 
-	var chainCode : String = "8a15262b11be5966f5816ecd52f6a177f1dcf3392892ea950f691874af1a7d6657afc03e87edbfe76a8fd7a4082680b2bfc4e836a3127aa656ab72b7651788c5"
-	var chaincode_url : String = "https://76c87932401b41fd959e90733cd0954d-vp0.us.blockchain.ibm.com:5004/chaincode"
-	var method_func = ["method":"query","func":"read"]
-	
 	var name: AnyObject? {
 		get {return UserDefaults.standard.object(forKey: "name") as AnyObject}
 	}
@@ -38,13 +34,9 @@ class ItemViewController: UIViewController {
 		_itemModel.imageView.contentMode = UIViewContentMode.scaleAspectFill
 		self.view.addSubview(_itemModel.imageView)
 		
+		//Chain Code
 		let chainCodeAccessModel = ChainCodeAccessModel()
-		chainCodeAccessModel.url = self.chaincode_url
-		chainCodeAccessModel.chainCode = self.chainCode
-		chainCodeAccessModel.method = self.method_func["method"]
-		chainCodeAccessModel.funcs = self.method_func["func"]
-		chainCodeAccessModel.key = self.hashKey as! String
-		chainCodeAccessModel.makeParams()
+		chainCodeAccessModel.getChainCodeAccessModel(_url: "chaincode",_method: "query",_func: "read",_key: self.hashKey as! String,_val: nil)
 		
 		//QUERY CHAIN CODE
 		let alamoController = AlamoController()
@@ -78,9 +70,11 @@ class ItemViewController: UIViewController {
 	
 	func makeLabel(_x:CGFloat,_y:CGFloat,_w:CGFloat,_h:CGFloat,_t:String)->UILabel{
 		let _return: UILabel = UILabel(frame: CGRect(x: _x, y: _y, width: _w, height: _h))
+
 		_return.textColor = UIColor.black
 		_return.text = _t
 		_return.adjustsFontSizeToFitWidth = true
+		
 		return _return
 	}
 	

@@ -8,7 +8,6 @@ class AlamoController : NSObject{
 	}
 	
 	func blockchainQuery(model:ChainCodeAccessModel,completionHandler: @escaping (NSDictionary?, Error?) -> ()) {
-		
 		var request = URLRequest(url: URL(string: model.url)!)
 		request.httpMethod = "POST"
 		request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -22,6 +21,5 @@ class AlamoController : NSObject{
 				case .failure(let error):completionHandler(nil, error)
 				}
 			}
-
 	}	
 }

@@ -41,7 +41,7 @@ class RegistViewController: UIViewController,AVCaptureMetadataOutputObjectsDeleg
 		super.viewDidLoad()
 		
 		// Do any additional setup after loading the view.
-
+		
 		let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
 		session = AVCaptureSession.init()
 		guard session != nil else {
@@ -71,9 +71,6 @@ class RegistViewController: UIViewController,AVCaptureMetadataOutputObjectsDeleg
 		super.viewWillAppear(animated)
 
 		self.session?.startRunning()
-	}
-	
-	override func viewDidAppear(_ animated: Bool) {
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -107,6 +104,7 @@ class RegistViewController: UIViewController,AVCaptureMetadataOutputObjectsDeleg
 
 	//Change Owner画面遷移
 	func goForward(_custom_hash:AnyObject){
+
 		getBlockChain(_custom_hash: _custom_hash)
 		
 		let item = OwnerChangeViewController()
@@ -115,20 +113,13 @@ class RegistViewController: UIViewController,AVCaptureMetadataOutputObjectsDeleg
 	}
 	
 	func getBlockChain(_custom_hash:AnyObject){
-		let chainCode : String = "8a15262b11be5966f5816ecd52f6a177f1dcf3392892ea950f691874af1a7d6657afc03e87edbfe76a8fd7a4082680b2bfc4e836a3127aa656ab72b7651788c5"
-		let chaincode_url : String = "https://76c87932401b41fd959e90733cd0954d-vp0.us.blockchain.ibm.com:5004/chaincode"
-		var method_func = ["method":"query","func":"read"]
-		let args = getRandom()
-		/* ほんとは引数の_custom_hashがKey */
-		
+
+		//Chain Code
 		let chainCodeAccessModel = ChainCodeAccessModel()
-		chainCodeAccessModel.url = chaincode_url
-		chainCodeAccessModel.chainCode = chainCode
-		chainCodeAccessModel.method = method_func["method"]
-		chainCodeAccessModel.funcs = method_func["func"]
-		chainCodeAccessModel.key = args
-		chainCodeAccessModel.makeParams()
-		
+		let args = getRandom()	/* ほんとは引数の_custom_hashがKey */
+		chainCodeAccessModel.getChainCodeAccessModel(_url: "chaincode",_method: "query",_func: "read",_key: args,_val: nil)
+
+		//QUERY CHAIN CODE
 		let alamoController = AlamoController()
 		alamoController.getAlamofire(model:chainCodeAccessModel) { responseObject, error in
 			let json = JSON(responseObject!)
@@ -139,6 +130,7 @@ class RegistViewController: UIViewController,AVCaptureMetadataOutputObjectsDeleg
 		}
 	}
 	
+	/* For Development */
 	func getRandom()->String{
 		var _dictionary : [String] = []
 		_dictionary.append("aIOhDmxk9Tne9YIPbsw7YXnUwnYNKzt5RAce9O9YHhkQLkaxYtDf6Ttcm4F/uGDgaVU1Pt8hPtvjma4ZrpAtBw==")

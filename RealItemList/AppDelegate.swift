@@ -11,7 +11,7 @@ import Eureka
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-	
+
 	internal var window: UIWindow?
 	private var myTabBarController: MainTabBarController = MainTabBarController()
 	

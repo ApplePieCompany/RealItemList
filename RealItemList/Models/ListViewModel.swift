@@ -12,6 +12,7 @@ class ListViewModel: NSObject{
 
 	let constNavigationTitle = "My正規商品リスト"
 	let constReuseIdentifier = "MyCell"
+	var MyHash : String!
 
 	var myCollectionView : UICollectionView!
 	var itemModels: [ItemModel]!
@@ -33,6 +34,7 @@ class ListViewModel: NSObject{
 	}
 	
 	override init() {
+		self.MyHash = Utility.MyHash
 	}
 	
 	func getMyCollecionView(frame:CGRect)->UICollectionView{
@@ -43,8 +45,7 @@ class ListViewModel: NSObject{
 
 		let _return = UICollectionView(frame: frame, collectionViewLayout: layout)
 		_return.backgroundColor = UIColor.white
-		_return.register(UICollectionViewCell.self, forCellWithReuseIdentifier: self.constReuseIdentifier)
-		
+		_return.register(UICollectionViewCell.self, forCellWithReuseIdentifier: self.constReuseIdentifier)		
 		return _return
 	}
 	

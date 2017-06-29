@@ -43,6 +43,7 @@
 		0A415F891EFBA53D00C37257 /* conf.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A415F871EFBA53D00C37257 /* conf.png */; };
 		0A415F8A1EFBA53D00C37257 /* regist.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A415F881EFBA53D00C37257 /* regist.png */; };
 		0A8DE5591F008BCD00DD42FC /* AlamoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8DE5581F008BCD00DD42FC /* AlamoController.swift */; };
+		0A9ACBCD1F04851E0039DE7F /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9ACBCC1F04851E0039DE7F /* Utility.swift */; };
 		0AB185E31F01FBFF00D3EC68 /* OwnerChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB185E21F01FBFF00D3EC68 /* OwnerChangeViewController.swift */; };
 		0ABDB2E61F032D1F002060C4 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABDB2E51F032D1F002060C4 /* MainTabBarController.swift */; };
 		0AE55F991F00E1F900129F12 /* ChainCodeAccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE55F981F00E1F900129F12 /* ChainCodeAccessModel.swift */; };
@@ -110,6 +111,7 @@
 		0A415F871EFBA53D00C37257 /* conf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = conf.png; sourceTree = "<group>"; };
 		0A415F881EFBA53D00C37257 /* regist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = regist.png; sourceTree = "<group>"; };
 		0A8DE5581F008BCD00DD42FC /* AlamoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamoController.swift; sourceTree = "<group>"; };
+		0A9ACBCC1F04851E0039DE7F /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		0AB185E21F01FBFF00D3EC68 /* OwnerChangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnerChangeViewController.swift; sourceTree = "<group>"; };
 		0ABDB2E51F032D1F002060C4 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabBarController.swift; path = Controller/MainTabBarController.swift; sourceTree = "<group>"; };
 		0AE55F981F00E1F900129F12 /* ChainCodeAccessModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainCodeAccessModel.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				0A03B7AF1EFCA56B0024DBEC /* ItemViewController.swift */,
 				0A8DE5581F008BCD00DD42FC /* AlamoController.swift */,
 				0AB185E21F01FBFF00D3EC68 /* OwnerChangeViewController.swift */,
+				0A9ACBCC1F04851E0039DE7F /* Utility.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				0A03B7B01EFCA56B0024DBEC /* ItemViewController.swift in Sources */,
 				0A415F4B1EFB791100C37257 /* AppDelegate.swift in Sources */,
 				0AE55F991F00E1F900129F12 /* ChainCodeAccessModel.swift in Sources */,
+				0A9ACBCD1F04851E0039DE7F /* Utility.swift in Sources */,
 				0AF846171EFCDABA000A0A19 /* ItemModel.swift in Sources */,
 				0A8DE5591F008BCD00DD42FC /* AlamoController.swift in Sources */,
 				0A415F7F1EFB7E4900C37257 /* ListViewController.swift in Sources */,

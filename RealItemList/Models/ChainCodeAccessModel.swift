@@ -23,13 +23,23 @@ class ChainCodeAccessModel: NSObject {
 	override init() {
 	}
 	
-	func makeParams(){
-		var _args:[String] = []
-		_args.append(self.key)
-		if(self.val != nil){
-			_args.append(self.val!)
-		}
+	func getChainCodeAccessModel(_url:String,_method:String,_func:String,_key:String,_val:String?){
+		self.url = Utility.BlockChain_url + _url
+		self.chainCode = Utility.ChainCode
+		self.method = _method
+		self.funcs = _func
+		self.key = _key
+		self.val = _val
+		self.makeParams(_key: _key, _val: _val)
+	}
 
+	func makeParams(_key:String,_val:String?){
+		var _args:[String] = []
+		_args.append(_key)
+		if(_val != nil){
+			_args.append(_val!)
+		}
+		
 		self.parameters = [
 			"jsonrpc": "2.0",
 			"method": self.method,
@@ -45,4 +55,5 @@ class ChainCodeAccessModel: NSObject {
 			"id": 0
 		]
 	}
+
 }

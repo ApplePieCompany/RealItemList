@@ -12,12 +12,14 @@ import SwiftyJSON
 
 class OwnerChangeViewController: FormViewController {
 
-	var constMyHash = "Xtsy5hx/ShJWCvyVm1+NXC6Jm/vvK+3X224WBM8vk82flD8TcgoCdGlyQduW4V4HaOXXhWYDkqxjOfkjnIhrGA=="
+	var constMyHash : String!
 	var serial = ""
 
 	var custom_hash: AnyObject? {
 		get {return UserDefaults.standard.object(forKey: "custom_hash") as AnyObject}
 	}
+
+	static var dateFormat = Utility.dateFormat
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -25,6 +27,8 @@ class OwnerChangeViewController: FormViewController {
 		// Do any additional setup after loading the view.
 		
 		self.view.backgroundColor = UIColor.green
+		
+		self.constMyHash = Utility.MyHash
 		
 		form
 			+++ Section("正規商品登録")
@@ -66,19 +70,13 @@ class OwnerChangeViewController: FormViewController {
 	}
 	
 	func setBlockChain(){
-		let chainCode : String = "8a15262b11be5966f5816ecd52f6a177f1dcf3392892ea950f691874af1a7d6657afc03e87edbfe76a8fd7a4082680b2bfc4e836a3127aa656ab72b7651788c5"
-		let chaincode_url : String = "https://76c87932401b41fd959e90733cd0954d-vp0.us.blockchain.ibm.com:5004/chaincode"
-		var method_func = ["method":"invoke","func":"write"]
-		
+
+		//Chain Code
 		let chainCodeAccessModel = ChainCodeAccessModel()
-		chainCodeAccessModel.url = chaincode_url
-		chainCodeAccessModel.chainCode = chainCode
-		chainCodeAccessModel.method = method_func["method"]
-		chainCodeAccessModel.funcs = method_func["func"]
-		chainCodeAccessModel.key = self.custom_hash as! String
-		chainCodeAccessModel.val = setArgs(_ser: self.serial,_myHash: self.constMyHash)
-		chainCodeAccessModel.makeParams()
+		let val = setArgs(_ser: self.serial,_myHash: self.constMyHash)
+		chainCodeAccessModel.getChainCodeAccessModel(_url: "chaincode",_method: "invoke",_func: "write",_key: self.custom_hash as! String,_val:val )
 		
+		//QUERY CHAIN CODE
 		let alamoController = AlamoController()
 		alamoController.getAlamofire(model:chainCodeAccessModel) { responseObject, error in
 			let json = JSON(responseObject!)
@@ -92,14 +90,7 @@ class OwnerChangeViewController: FormViewController {
 	}
 
 	func setArgs(_ser:String,_myHash:String)->String{
-		var _return : String = ""
-		
-		let formatter = DateFormatter()
-		formatter.dateFormat = "yyyy/MM/dd"
-		let now = Date()
-		
-		_return = "'ser':'\(_ser)','owner':'\(_myHash)','upd':'\(formatter.string(from: now))'"
-		return _return
+		return "'ser':'\(_ser)','owner':'\(_myHash)','upd':'\(type(of: self).dateFormat.string(from: Date()))'"
 	}
 	
 	
